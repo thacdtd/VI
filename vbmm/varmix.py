@@ -82,15 +82,15 @@ def run(X,K,VERBOSE=True):
                 sctX = scatter(X[:,0],X[:,1])
                 sctZ = scatter(m[:,0],m[:,1],color='r')
             else:
-                #ellipses to show covariance of components
+                # ellipses to show covariance of components
                 for circ in circs: circ.remove()
                 circs = []
                 for k in range(K):
                     circ = create_cov_ellipse(S[k], m[k,:],color='r',alpha=0.3) #calculate params of ellipses (adapted from http://stackoverflow.com/questions/12301071/multidimensional-confidence-intervals)
                     circs.append(circ)
-                    #add to axes:
+                    # add to axes:
                     ax_spatial.add_artist(circ)
-                    #make sure components with NK=0 are not visible:
+                    # make sure components with NK=0 are not visible:
                     if NK[k]<=alpha0: m[k,:] = m[NK.argmax(),:] #put over point that obviously does have assignments
                 sctZ.set_offsets(m)
             draw()
